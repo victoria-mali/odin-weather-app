@@ -6,14 +6,32 @@
     <title>Weather app</title>
   </head>
   <body>
-    <!--     <label for="city-search">City</label>
- -->
-    <input type="search" id="city-search" name="city-search" />
+    <div class="container">
+      <div class="header">
+        <h1>Weather</h1>
+        <div class="search-container">
+          <input
+            type="search"
+            id="city-search"
+            name="city-search"
+            aria-label="City search"
+            placeholder="Enter your city"
+          />
 
-    <button class="search-btn">Search</button>
+          <button class="search-btn">Search</button>
+        </div>
+      </div>
 
-    <div class="temperature-info">
-      <p class="temperature"></p>
+      <div class="temperature-info">
+        <p class="conditions">Sunny</p>
+        <div class="temp-info-container">
+          <div class="temp-info-left">
+            <p class="temperature">31°C</p>
+            <p class="temp-feels-like">Feels like 31°C</p>
+          </div>
+          <p class="location">Porto, Portugal</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>
