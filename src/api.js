@@ -5,10 +5,18 @@ async function fetchWeatherData(location) {
   return await response.json();
 }
 
+function celcToFahr(n) {
+  return Math.round((n * 9.0) / 5.0 + 32.0);
+}
+
 async function processWeatherData(city) {
   const weatherData = await fetchWeatherData(city);
-  const weatherDetails = {
-    temp: weatherData.currentConditions.temp,
+  let weatherDetails = {
+    tempC: weatherData.currentConditions.temp,
+    tempF: celcToFahr(weatherData.currentConditions.temp),
+    conditions: weatherData.currentConditions.conditions,
+    feelslikeC: weatherData.currentConditions.feelslike,
+    feelslikeF: celcToFahr(weatherData.currentConditions.feelslike),
   };
   return weatherDetails;
 }
