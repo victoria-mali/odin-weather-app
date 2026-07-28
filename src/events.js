@@ -1,9 +1,8 @@
 import { elements, renderWeather, throwError } from "./dom.js";
 import { processWeatherData } from "./api.js";
 
-async function showWeather() {
-  let searchValue = elements.searchBar.value;
-  let weatherObj = await processWeatherData(searchValue);
+async function showWeather(location) {
+  let weatherObj = await processWeatherData(location);
   if (!weatherObj) {
     throwError();
   } else {
@@ -11,18 +10,25 @@ async function showWeather() {
   }
 }
 
-elements.searchBtn.addEventListener("click", showWeather);
+elements.searchBtn.addEventListener("click", (e) => {
+  let searchValue = elements.searchBar.value;
+  showWeather(searchValue);
+});
 
 elements.celsiusBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.add("active-btn");
   elements.fahrenheitBtn.classList.remove("active-btn");
-  showWeather();
+  let currentLocation = elements.locationText.textContent;
+
+  showWeather(currentLocation);
 });
 
 elements.fahrenheitBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.remove("active-btn");
   elements.fahrenheitBtn.classList.add("active-btn");
-  showWeather();
+  let currentLocation = elements.locationText.textContent;
+
+  showWeather(currentLocation);
 });
 
 /* document.addEventListener("DOMContentLoaded", async function (e) {

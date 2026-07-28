@@ -1,8 +1,11 @@
+:root {
+  --color-text: #3b343b;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 *:not(dialog) {
@@ -47,9 +50,18 @@ h6 {
   text-wrap: balance;
 }
 
+body {
+  color: var(--color-text);
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 .container {
   width: 1100px;
   margin: 24px auto;
+}
+
+h1 {
+  font-weight: 600;
 }
 
 .header {
@@ -57,6 +69,77 @@ h6 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+}
+
+.header-left {
+    display: flex;
+    gap: 40px;
+}
+
+.location {
+    background-color: #f3f3f4;
+    border-radius: 24px;
+    padding: 8px 24px;
+    padding-left: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.location-icon {
+    width: 20px;
+}
+
+.location-text {
+    font-size: 18px;
+    color: var(--color-text);
+}
+
+.search-container {
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+}
+
+.search {
+  width: 300px;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-right: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 24px;
+  outline: none;
+  background-color: #f3f3f4;
+  color: #0d0c22;
+  transition: 0.3s ease;
+}
+
+.search::placeholder {
+  color: #9e9ea7;
+}
+
+.search:focus,
+search:hover {
+  outline: none;
+  border-color: rgba(0, 48, 73, 0.4);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(0 48 73 / 10%);
+}
+
+.search-btn {
+  position: absolute;
+  right: 1rem;
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.icon {
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
 }
 
 .temperature-info {
@@ -68,42 +151,45 @@ h6 {
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 32px;
 }
 
 .temp-info-row1 {
-    display: flex;
-    justify-content: space-between;
-}
-
-.temp-info-row2 {
   display: flex;
   justify-content: space-between;
-  align-items: end;
 }
 
 .temp-info-right {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.conditions {
+    font-size: 28px;
 }
 
 .temperature {
-  font-size: 80px;
+  font-size: 90px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
+.temp-feels-like {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 300;
+}
 
-.celsius-btn, .fahrenheit-btn {
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    background-color: white;
-    width: 50px;
-    height: 50px;
+.celsius-btn,
+.fahrenheit-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 100px;
+  background-color: white;
+  width: 50px;
+  height: 50px;
 }
 
 .active-btn {
-    background-color: rgb(192, 201, 185);
+  background-color: rgb(192, 201, 185);
 }
-

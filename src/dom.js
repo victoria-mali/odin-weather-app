@@ -11,23 +11,24 @@ import wind from "./img/wind.jpg";
 const weatherImages = {
   "clear-day": clearDay,
   "partly-cloudy-day": partlyCloudyDay,
-  rain: rain,
+  "rain": rain,
   "clear-night": clearNight,
-  snow: snow,
-  fog: fog,
+  "snow": snow,
+  "fog": fog,
   "partly-cloudy-night": partlyCloudyNight,
-  cloudy: cloudy,
-  wind: wind,
+  "cloudy": cloudy,
+  "wind": wind,
 };
 
 const elements = {
   tempInfoDiv: document.querySelector(".temperature-info"),
+  searchContainer: document.querySelector(".search-container"),
   searchBar: document.getElementById("city-search"),
   searchBtn: document.querySelector(".search-btn"),
   temperature: document.querySelector(".temperature"),
   conditions: document.querySelector(".conditions"),
   feelslike: document.querySelector(".temp-feels-like"),
-  location: document.querySelector(".location"),
+  locationText: document.querySelector(".location-text"),
   celsiusBtn: document.querySelector(".celsius-btn"),
   fahrenheitBtn: document.querySelector(".fahrenheit-btn"),
 };
@@ -68,8 +69,7 @@ function renderWeather(weatherObj) {
   }
   elements.conditions.textContent = weatherObj.conditions;
   let initializedLocation = capitalizeNames(weatherObj.location);
-  elements.location.textContent = initializedLocation;
-  // weatherObj.location.charAt(0).toUpperCase() + weatherObj.location.slice(1);
+  elements.locationText.textContent = initializedLocation;
 
   let icon = weatherObj.icon;
   let backgroundImg = weatherImages[icon];
