@@ -11,13 +11,11 @@ elements.searchBtn.addEventListener("click", showWeather);
 elements.celsiusBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.add("active-btn");
   elements.fahrenheitBtn.classList.remove("active-btn");
-
   showWeather();
 });
 
 elements.fahrenheitBtn.addEventListener("click", (e) => {
-        elements.celsiusBtn.classList.remove("active-btn");
-
+  elements.celsiusBtn.classList.remove("active-btn");
   elements.fahrenheitBtn.classList.add("active-btn");
   showWeather();
 });

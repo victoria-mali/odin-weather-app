@@ -11,12 +11,14 @@ function celcToFahr(n) {
 
 async function processWeatherData(city) {
   const weatherData = await fetchWeatherData(city);
+  console.log(weatherData);
   let weatherDetails = {
-    tempC: weatherData.currentConditions.temp,
+    tempC: Math.round(weatherData.currentConditions.temp),
     tempF: celcToFahr(weatherData.currentConditions.temp),
     conditions: weatherData.currentConditions.conditions,
     feelslikeC: weatherData.currentConditions.feelslike,
     feelslikeF: celcToFahr(weatherData.currentConditions.feelslike),
+    icon: weatherData.currentConditions.icon,
   };
   return weatherDetails;
 }
