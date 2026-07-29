@@ -8,7 +8,10 @@
   <body>
     <div class="container">
       <div class="header">
-        <h1>Weather</h1>
+        <div class="logo-div">
+          <img class="logo" src="img/logo-white.svg" alt="Cloudee logo representing a cloud">
+          <img class="logo-text" src="img/logo-text.svg" alt="Cloudee text logo">
+        </div>
         <div class="header-right">
           <div class="location">
             <svg
@@ -34,7 +37,7 @@
             </svg>
             <p class="location-text">Porto</p>
           </div>
-          <div class="search-container">
+          <form method="get" class="search-container">
             <input
               type="search"
               class="search"
@@ -42,6 +45,8 @@
               name="city-search"
               aria-label="City search"
               placeholder="Enter your city"
+              maxlength="25"
+              required
             />
 
             <button type="submit" class="search-btn">
@@ -53,12 +58,13 @@
                 </g>
               </svg>
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
+              <p class="error invisible"></p>
+
       <div class="temperature-info">
-        <p class="error invisible">Location not found :( Please, try again.</p>
         <div class="temp-info-row1">
           <p class="conditions">Sunny</p>
           <div class="switch-buttons">

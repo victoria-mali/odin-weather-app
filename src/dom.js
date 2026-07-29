@@ -25,6 +25,7 @@ const elements = {
   searchContainer: document.querySelector(".search-container"),
   searchBar: document.getElementById("city-search"),
   searchBtn: document.querySelector(".search-btn"),
+  locationDiv: document.querySelector(".location"),
   locationText: document.querySelector(".location-text"),
   celsiusBtn: document.querySelector(".celsius-btn"),
   fahrenheitBtn: document.querySelector(".fahrenheit-btn"),
@@ -45,27 +46,10 @@ const elements = {
 };
 
 function capitalizeNames(name) {
-  let nameArray = Array.from(name.split(/\s+/));
-  let arrayLength = nameArray.length;
-
-  if (arrayLength === 1) {
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  } else {
-    let firstName =
-      nameArray.at(0).charAt(0).toUpperCase() + nameArray.at(0).slice(1);
-    let lastName =
-      nameArray.at(-1).charAt(0).toUpperCase() + nameArray.at(-1).slice(1);
-    let middleNames = nameArray.slice(1, -1);
-
-    function capitalize(name) {
-      let capitalName;
-      return (capitalName = name.charAt(0).toUpperCase() + name.slice(1));
-    }
-    let capitalizedNames = middleNames.map(capitalize);
-    let joinedNames = capitalizedNames.join(" ");
-
-    return firstName + " " + joinedNames + " " + lastName;
-  }
+  return name
+    .split(/\s+/)
+    .map((w) => w[0].toUpperCase() + w.slice(1))
+    .join(" ");
 }
 
 function renderWeather(weatherObj) {
@@ -78,12 +62,17 @@ function renderWeather(weatherObj) {
     elements.feelslike.textContent =
       "Feels like " + weatherObj.feelslikeF + "°F";
   }
+
+  if (weatherObj.precip === null) {
+    elements.precip.textContent = "0";
+  } else {
+    elements.precip.textContent = weatherObj.precip;
+  }
+
   elements.conditions.textContent = weatherObj.conditions;
   let initializedLocation = capitalizeNames(weatherObj.location);
   elements.locationText.textContent = initializedLocation;
-
   elements.description.textContent = weatherObj.description;
-  elements.precip.textContent = weatherObj.precip;
   elements.precipprob.textContent = weatherObj.precipprob + "%";
   elements.humidity.textContent = weatherObj.humidity + "%";
   elements.sunrise.textContent = weatherObj.sunrise.slice(0, 5);
@@ -98,25 +87,18 @@ function renderWeather(weatherObj) {
   elements.tempInfoDiv.style.backgroundSize = "cover";
 
   elements.errorMsg.classList.add("invisible");
+  elements.locationDiv.classList.remove("invisible");
+
   elements.moreInfoDiv.classList.remove("invisible");
-  elements.conditions.classList.remove("invisible");
-  elements.temperature.classList.remove("invisible");
-  elements.feelslike.classList.remove("invisible");
-  elements.celsiusBtn.classList.remove("invisible");
-  elements.fahrenheitBtn.classList.remove("invisible");
-  elements.description.classList.remove("invisible");
+  elements.tempInfoDiv.classList.remove("invisible");
 }
 
-function throwError() {
+function renderError(message) {
   elements.errorMsg.classList.remove("invisible");
-  elements.locationText.textContent = "Location not found";
+  elements.errorMsg.textContent = message;
+  elements.locationDiv.classList.add("invisible");
   elements.moreInfoDiv.classList.add("invisible");
-  elements.conditions.classList.add("invisible");
-  elements.temperature.classList.add("invisible");
-  elements.feelslike.classList.add("invisible");
-  elements.celsiusBtn.classList.add("invisible");
-  elements.fahrenheitBtn.classList.add("invisible");
-  elements.description.classList.add("invisible");
+  elements.tempInfoDiv.classList.add("invisible");
 }
 
-export { elements, renderWeather, throwError };
+export { elements, renderWeather, renderError };

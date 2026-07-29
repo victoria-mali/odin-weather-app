@@ -1,16 +1,22 @@
-import { elements, renderWeather, throwError } from "./dom.js";
+import { elements, renderWeather, renderError } from "./dom.js";
 import { processWeatherData } from "./api.js";
 
+let lastSearch;
+
 async function showWeather(location) {
-  let weatherObj = await processWeatherData(location);
-  if (!weatherObj) {
-    throwError();
-  } else {
-    renderWeather(weatherObj);
+  let weatherObj;
+  try {
+    weatherObj = await processWeatherData(location);
+  } catch (error) {
+    renderError(error.message);
+    return;
   }
+  lastSearch = weatherObj;
+  renderWeather(lastSearch);
 }
 
-elements.searchBtn.addEventListener("click", (e) => {
+elements.searchContainer.addEventListener("submit", (e) => {
+  e.preventDefault();
   let searchValue = elements.searchBar.value;
   showWeather(searchValue);
 });
@@ -18,27 +24,17 @@ elements.searchBtn.addEventListener("click", (e) => {
 elements.celsiusBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.add("active-btn");
   elements.fahrenheitBtn.classList.remove("active-btn");
-  let currentLocation = elements.locationText.textContent;
 
-  showWeather(currentLocation);
+  renderWeather(lastSearch);
 });
 
 elements.fahrenheitBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.remove("active-btn");
   elements.fahrenheitBtn.classList.add("active-btn");
-  let currentLocation = elements.locationText.textContent;
 
-  showWeather(currentLocation);
-});
-
-elements.searchBar.addEventListener("keyup", (e) => {
-  if (event.keyCode === 13) {
-    e.preventDefault();
-    elements.searchBtn.click();
-  }
+  renderWeather(lastSearch);
 });
 
 /* document.addEventListener("DOMContentLoaded", async function (e) {
-  let weatherObj = await processWeatherData("porto");
-  renderWeather(weatherObj);
+  showWeather("porto");
 }); */
