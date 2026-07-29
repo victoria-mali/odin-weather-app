@@ -11,13 +11,13 @@ import wind from "./img/wind.jpg";
 const weatherImages = {
   "clear-day": clearDay,
   "partly-cloudy-day": partlyCloudyDay,
-  "rain": rain,
+  rain: rain,
   "clear-night": clearNight,
-  "snow": snow,
-  "fog": fog,
+  snow: snow,
+  fog: fog,
   "partly-cloudy-night": partlyCloudyNight,
-  "cloudy": cloudy,
-  "wind": wind,
+  cloudy: cloudy,
+  wind: wind,
 };
 
 const elements = {
@@ -40,6 +40,8 @@ const elements = {
   windspeed: document.querySelector(".windspeed"),
   pressure: document.querySelector(".pressure"),
   description: document.querySelector(".description"),
+  errorMsg: document.querySelector(".error"),
+  moreInfoDiv: document.querySelector(".more-info"),
 };
 
 function capitalizeNames(name) {
@@ -80,7 +82,7 @@ function renderWeather(weatherObj) {
   let initializedLocation = capitalizeNames(weatherObj.location);
   elements.locationText.textContent = initializedLocation;
 
-elements.description.textContent = weatherObj.description;
+  elements.description.textContent = weatherObj.description;
   elements.precip.textContent = weatherObj.precip;
   elements.precipprob.textContent = weatherObj.precipprob + "%";
   elements.humidity.textContent = weatherObj.humidity + "%";
@@ -94,10 +96,27 @@ elements.description.textContent = weatherObj.description;
   let backgroundImg = weatherImages[icon];
   elements.tempInfoDiv.style.backgroundImage = `url(${backgroundImg})`;
   elements.tempInfoDiv.style.backgroundSize = "cover";
+
+  elements.errorMsg.classList.add("invisible");
+  elements.moreInfoDiv.classList.remove("invisible");
+  elements.conditions.classList.remove("invisible");
+  elements.temperature.classList.remove("invisible");
+  elements.feelslike.classList.remove("invisible");
+  elements.celsiusBtn.classList.remove("invisible");
+  elements.fahrenheitBtn.classList.remove("invisible");
+  elements.description.classList.remove("invisible");
 }
 
 function throwError() {
-  elements.temperature.textContent = "Error";
+  elements.errorMsg.classList.remove("invisible");
+  elements.locationText.textContent = "Location not found";
+  elements.moreInfoDiv.classList.add("invisible");
+  elements.conditions.classList.add("invisible");
+  elements.temperature.classList.add("invisible");
+  elements.feelslike.classList.add("invisible");
+  elements.celsiusBtn.classList.add("invisible");
+  elements.fahrenheitBtn.classList.add("invisible");
+  elements.description.classList.add("invisible");
 }
 
 export { elements, renderWeather, throwError };

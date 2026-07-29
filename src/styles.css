@@ -5,7 +5,7 @@
   --border-color: #9e9ea7;
   --white: #feffff;
   --shadow-color: 0deg 0% 76%;
-    --shadow-elevation-medium:
+  --shadow-elevation-medium:
     0.3px 0.4px 0.7px hsl(var(--shadow-color) / 0.09),
     0.9px 1.5px 2.3px -0.4px hsl(var(--shadow-color) / 0.14),
     1.8px 3.1px 4.7px -0.8px hsl(var(--shadow-color) / 0.19),
@@ -84,7 +84,7 @@ h1 {
 
 .header-right {
   display: flex;
-  gap: 40px;
+  gap: 24px;
 }
 
 .location {
@@ -94,6 +94,7 @@ h1 {
   padding-left: 12px;
   display: flex;
   gap: 8px;
+  border: 1px solid var(--border-color);
 }
 
 .location-icon {
@@ -166,6 +167,12 @@ search:hover {
   text-shadow: 1px 1px 4px rgba(48, 34, 48, 0.5);
 }
 
+.error {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 40px;
+}
+
 .temp-info-row1 {
   display: flex;
   justify-content: space-between;
@@ -178,7 +185,7 @@ search:hover {
 }
 
 .description {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .temp-info-right {
@@ -187,7 +194,7 @@ search:hover {
 }
 
 .conditions {
-  font-size: 28px;
+  font-size: 24px;
 }
 
 .temperature {
@@ -221,7 +228,7 @@ search:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-gap: 32px;
+  gap: 32px;
 }
 
 .info-div {
@@ -250,21 +257,21 @@ gap: 32px;
 }
 
 .copyright {
-    margin-top: 50px;
-    width: 100%;
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .copyright img {
-    width: 25px;
-    transition: all 0.3s ease-in-out 0s; 
+  width: 25px;
+  transition: all 0.3s ease-in-out 0s;
 }
 
 .copyright img:hover {
-    transform: rotate(360deg);
+  transform: rotate(360deg);
 }
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -272,17 +279,22 @@ input[type="search"]::-webkit-search-cancel-button {
   height: 1em;
   width: 1em;
   border-radius: 50em;
-  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg) no-repeat 50% 50%;
+  background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg)
+    no-repeat 50% 50%;
   background-size: contain;
   opacity: 0;
   pointer-events: none;
 }
 
 input[type="search"]:focus::-webkit-search-cancel-button {
-  opacity: .3;
+  opacity: 0.3;
   pointer-events: all;
 }
 
 input[type="search"].dark::-webkit-search-cancel-button {
   filter: invert(1);
+}
+
+.invisible {
+  display: none;
 }
