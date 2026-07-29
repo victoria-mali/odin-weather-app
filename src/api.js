@@ -9,7 +9,6 @@ function celcToFahr(n) {
   return Math.round((n * 9.0) / 5.0 + 32.0);
 }
 
-
 async function processWeatherData(city) {
   try {
     const weatherData = await fetchWeatherData(city);
@@ -22,6 +21,15 @@ async function processWeatherData(city) {
       feelslikeF: celcToFahr(weatherData.currentConditions.feelslike),
       icon: weatherData.currentConditions.icon,
       location: weatherData.resolvedAddress,
+      precip: weatherData.currentConditions.precip,
+      precipprob: weatherData.currentConditions.precipprob,
+      humidity: weatherData.currentConditions.humidity,
+      sunrise: weatherData.currentConditions.sunrise,
+      sunset: weatherData.currentConditions.sunset,
+      uvindex: weatherData.currentConditions.uvindex,
+      windspeed: weatherData.currentConditions.humidity,
+      pressure: weatherData.currentConditions.pressure,
+      description: weatherData.description,
     };
     return weatherDetails;
   } catch (error) {

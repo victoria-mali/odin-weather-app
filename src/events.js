@@ -31,6 +31,13 @@ elements.fahrenheitBtn.addEventListener("click", (e) => {
   showWeather(currentLocation);
 });
 
+elements.searchBar.addEventListener("keyup", (e) => {
+  if (event.keyCode === 13) {
+    e.preventDefault();
+    elements.searchBtn.click();
+  }
+});
+
 /* document.addEventListener("DOMContentLoaded", async function (e) {
   let weatherObj = await processWeatherData("porto");
   renderWeather(weatherObj);

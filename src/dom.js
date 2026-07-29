@@ -25,12 +25,21 @@ const elements = {
   searchContainer: document.querySelector(".search-container"),
   searchBar: document.getElementById("city-search"),
   searchBtn: document.querySelector(".search-btn"),
-  temperature: document.querySelector(".temperature"),
-  conditions: document.querySelector(".conditions"),
-  feelslike: document.querySelector(".temp-feels-like"),
   locationText: document.querySelector(".location-text"),
   celsiusBtn: document.querySelector(".celsius-btn"),
   fahrenheitBtn: document.querySelector(".fahrenheit-btn"),
+  temperature: document.querySelector(".temperature"),
+  conditions: document.querySelector(".conditions"),
+  feelslike: document.querySelector(".temp-feels-like"),
+  precip: document.querySelector(".precip"),
+  precipprob: document.querySelector(".precipprob"),
+  humidity: document.querySelector(".humidity"),
+  sunrise: document.querySelector(".sunrise"),
+  sunset: document.querySelector(".sunset"),
+  uvindex: document.querySelector(".uvindex"),
+  windspeed: document.querySelector(".windspeed"),
+  pressure: document.querySelector(".pressure"),
+  description: document.querySelector(".description"),
 };
 
 function capitalizeNames(name) {
@@ -70,6 +79,16 @@ function renderWeather(weatherObj) {
   elements.conditions.textContent = weatherObj.conditions;
   let initializedLocation = capitalizeNames(weatherObj.location);
   elements.locationText.textContent = initializedLocation;
+
+elements.description.textContent = weatherObj.description;
+  elements.precip.textContent = weatherObj.precip;
+  elements.precipprob.textContent = weatherObj.precipprob + "%";
+  elements.humidity.textContent = weatherObj.humidity + "%";
+  elements.sunrise.textContent = weatherObj.sunrise.slice(0, 5);
+  elements.sunset.textContent = weatherObj.sunset.slice(0, 5);
+  elements.uvindex.textContent = weatherObj.uvindex;
+  elements.windspeed.textContent = weatherObj.windspeed + " km/h";
+  elements.pressure.textContent = weatherObj.pressure + " mb";
 
   let icon = weatherObj.icon;
   let backgroundImg = weatherImages[icon];
