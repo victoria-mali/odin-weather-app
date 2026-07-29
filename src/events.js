@@ -1,9 +1,10 @@
-import { elements, renderWeather, renderError } from "./dom.js";
+import { elements, renderWeather, renderError, showLoading } from "./dom.js";
 import { processWeatherData } from "./api.js";
 
 let lastSearch;
 
 async function showWeather(location) {
+    showLoading();
   let weatherObj;
   try {
     weatherObj = await processWeatherData(location);

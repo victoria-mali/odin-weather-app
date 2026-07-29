@@ -43,6 +43,7 @@ const elements = {
   description: document.querySelector(".description"),
   errorMsg: document.querySelector(".error"),
   moreInfoDiv: document.querySelector(".more-info"),
+  loader: document.querySelector(".loader"),
 };
 
 function capitalizeNames(name) {
@@ -91,6 +92,9 @@ function renderWeather(weatherObj) {
 
   elements.moreInfoDiv.classList.remove("invisible");
   elements.tempInfoDiv.classList.remove("invisible");
+
+  elements.searchBtn.classList.remove("invisible");
+  elements.loader.classList.add("invisible");
 }
 
 function renderError(message) {
@@ -101,4 +105,9 @@ function renderError(message) {
   elements.tempInfoDiv.classList.add("invisible");
 }
 
-export { elements, renderWeather, renderError };
+function showLoading() {
+  elements.searchBtn.classList.add("invisible");
+  elements.loader.classList.remove("invisible");
+}
+
+export { elements, renderWeather, renderError, showLoading };
