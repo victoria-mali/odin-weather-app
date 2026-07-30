@@ -44,7 +44,12 @@ const elements = {
   errorMsg: document.querySelector(".error"),
   moreInfoDiv: document.querySelector(".more-info"),
   loader: document.querySelector(".loader"),
+  status: document.querySelector(".status"),
 };
+
+function setScreen(screen) {
+  document.body.dataset.state = screen;
+}
 
 function capitalizeNames(name) {
   return name
@@ -54,11 +59,11 @@ function capitalizeNames(name) {
 }
 
 function renderWeather(weatherObj) {
-  if (elements.celsiusBtn.classList.contains("active-btn")) {
+  if (elements.celsiusBtn.getAttribute("aria-pressed") === "true") {
     elements.temperature.textContent = weatherObj.tempC + "°C";
     elements.feelslike.textContent =
       "Feels like " + weatherObj.feelslikeC + "°C";
-  } else if (elements.fahrenheitBtn.classList.contains("active-btn")) {
+  } else if (elements.fahrenheitBtn.getAttribute("aria-pressed") === "true") {
     elements.temperature.textContent = weatherObj.tempF + "°F";
     elements.feelslike.textContent =
       "Feels like " + weatherObj.feelslikeF + "°F";
@@ -87,29 +92,21 @@ function renderWeather(weatherObj) {
   elements.tempInfoDiv.style.backgroundImage = `url(${backgroundImg})`;
   elements.tempInfoDiv.style.backgroundSize = "cover";
 
-  elements.errorMsg.classList.add("invisible");
-  elements.locationDiv.classList.remove("invisible");
+  elements.status.textContent = `${initializedLocation}: ${elements.temperature.textContent}, ${weatherObj.conditions}`;
 
-  elements.moreInfoDiv.classList.remove("invisible");
-  elements.tempInfoDiv.classList.remove("invisible");
-
-  elements.searchBtn.classList.remove("invisible");
-  elements.loader.classList.add("invisible");
+  setScreen("data");
 }
 
 function renderError(message) {
-  elements.searchBtn.classList.remove("invisible");
-  elements.loader.classList.add("invisible");
-  elements.errorMsg.classList.remove("invisible");
   elements.errorMsg.textContent = message;
-  elements.locationDiv.classList.add("invisible");
-  elements.moreInfoDiv.classList.add("invisible");
-  elements.tempInfoDiv.classList.add("invisible");
+  elements.status.textContent = message;
+
+  setScreen("error");
 }
 
 function showLoading() {
-  elements.searchBtn.classList.add("invisible");
-  elements.loader.classList.remove("invisible");
+  elements.status.textContent = "Loading weather…";
+  setScreen("loading");
 }
 
 export { elements, renderWeather, renderError, showLoading };

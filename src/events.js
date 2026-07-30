@@ -23,22 +23,22 @@ elements.searchContainer.addEventListener("submit", (e) => {
   showWeather(searchValue);
 });
 
-elements.celsiusBtn.addEventListener("click", (e) => {
-  elements.celsiusBtn.classList.add("active-btn");
-  elements.fahrenheitBtn.classList.remove("active-btn");
+elements.celsiusBtn.addEventListener("click", () => {
+  elements.celsiusBtn.setAttribute("aria-pressed", "true");
+  elements.fahrenheitBtn.setAttribute("aria-pressed", "false");
   if (!lastSearch) return;
 
   renderWeather(lastSearch);
 });
 
-elements.fahrenheitBtn.addEventListener("click", (e) => {
-  elements.celsiusBtn.classList.remove("active-btn");
-  elements.fahrenheitBtn.classList.add("active-btn");
+elements.fahrenheitBtn.addEventListener("click", () => {
+  elements.celsiusBtn.setAttribute("aria-pressed", "false");
+  elements.fahrenheitBtn.setAttribute("aria-pressed", "true");
   if (!lastSearch) return;
 
   renderWeather(lastSearch);
 });
 
-/* document.addEventListener("DOMContentLoaded", async function (e) {
+document.addEventListener("DOMContentLoaded", async function () {
   showWeather("porto");
-}); */
+});

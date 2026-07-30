@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather app</title>
   </head>
-  <body>
+  <body data-state="data">
     <div class="container">
       <div class="header">
         <div class="logo-div">
@@ -49,7 +49,7 @@
               required
             />
 
-            <button type="submit" class="search-btn">
+            <button type="submit" class="search-btn" aria-label="Search">
               <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
                 <g>
                   <path
@@ -59,19 +59,19 @@
               </svg>
             </button>
 
-            <div class="loader invisible"></div>
+            <div class="loader"></div>
           </form>
         </div>
       </div>
-
-              <p class="error invisible"></p>
+<p class="status visually-hidden" role="status"></p>
+              <p class="error"></p>
 
       <div class="temperature-info">
         <div class="temp-info-row1">
           <p class="conditions">Sunny</p>
           <div class="switch-buttons">
-            <button class="celsius-btn active-btn">°C</button>
-            <button class="fahrenheit-btn">°F</button>
+            <button class="celsius-btn" aria-pressed="true">°C</button>
+            <button class="fahrenheit-btn" aria-pressed="false">°F</button>
           </div>
         </div>
         <div class="temp-info-row2">

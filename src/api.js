@@ -25,7 +25,6 @@ function celcToFahr(n) {
 
 async function processWeatherData(city) {
   const weatherData = await fetchWeatherData(city);
-  console.log(weatherData);
   let weatherDetails = {
     tempC: Math.round(weatherData.currentConditions.temp),
     tempF: celcToFahr(weatherData.currentConditions.temp),
