@@ -98,6 +98,8 @@ function renderWeather(weatherObj) {
 }
 
 function renderError(message) {
+  elements.searchBtn.classList.remove("invisible");
+  elements.loader.classList.add("invisible");
   elements.errorMsg.classList.remove("invisible");
   elements.errorMsg.textContent = message;
   elements.locationDiv.classList.add("invisible");

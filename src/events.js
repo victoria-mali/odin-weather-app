@@ -4,11 +4,12 @@ import { processWeatherData } from "./api.js";
 let lastSearch;
 
 async function showWeather(location) {
-    showLoading();
+  showLoading();
   let weatherObj;
   try {
     weatherObj = await processWeatherData(location);
   } catch (error) {
+    lastSearch = null;
     renderError(error.message);
     return;
   }
@@ -25,6 +26,7 @@ elements.searchContainer.addEventListener("submit", (e) => {
 elements.celsiusBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.add("active-btn");
   elements.fahrenheitBtn.classList.remove("active-btn");
+  if (!lastSearch) return;
 
   renderWeather(lastSearch);
 });
@@ -32,6 +34,7 @@ elements.celsiusBtn.addEventListener("click", (e) => {
 elements.fahrenheitBtn.addEventListener("click", (e) => {
   elements.celsiusBtn.classList.remove("active-btn");
   elements.fahrenheitBtn.classList.add("active-btn");
+  if (!lastSearch) return;
 
   renderWeather(lastSearch);
 });
