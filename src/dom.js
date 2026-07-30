@@ -8,6 +8,18 @@ import partlyCloudyNight from "./img/partly-cloudy-night.jpg";
 import cloudy from "./img/cloudy.jpg";
 import wind from "./img/wind.jpg";
 
+import clearDayIcon from "./img/icons/clear-day.svg";
+import partlyCloudyDayIcon from "./img/icons/partly-cloudy-day.svg";
+import rainIcon from "./img/icons/rain.svg";
+import clearNightIcon from "./img/icons/clear-night.svg";
+import snowIcon from "./img/icons/snow.svg";
+import partlyCloudyNightIcon from "./img/icons/fog.svg";
+import fogIcon from "./img/icons/partly-cloudy-night.svg";
+import cloudyIcon from "./img/icons/cloudy.svg";
+import windIcon from "./img/icons/wind.svg";
+
+import { format } from "date-fns";
+
 const weatherImages = {
   "clear-day": clearDay,
   "partly-cloudy-day": partlyCloudyDay,
@@ -18,6 +30,18 @@ const weatherImages = {
   "partly-cloudy-night": partlyCloudyNight,
   cloudy: cloudy,
   wind: wind,
+};
+
+const forecastIcons = {
+  "clear-day": clearDayIcon,
+  "partly-cloudy-day": partlyCloudyDayIcon,
+  rain: rainIcon,
+  "clear-night": clearNightIcon,
+  snow: snowIcon,
+  fog: fogIcon,
+  "partly-cloudy-night": partlyCloudyNightIcon,
+  cloudy: cloudyIcon,
+  wind: windIcon,
 };
 
 const elements = {
@@ -45,6 +69,9 @@ const elements = {
   moreInfoDiv: document.querySelector(".more-info"),
   loader: document.querySelector(".loader"),
   status: document.querySelector(".status"),
+  forecast: document.querySelector(".forecast"),
+  forecastDayDiv: document.querySelectorAll(".forecast-day-div"),
+  date: document.querySelector(".date"),
 };
 
 function setScreen(screen) {
@@ -56,6 +83,35 @@ function capitalizeNames(name) {
     .split(/\s+/)
     .map((w) => w[0].toUpperCase() + w.slice(1))
     .join(" ");
+}
+
+function renderForecast(forecast) {
+  elements.forecastDayDiv.forEach((item) => {
+    item.innerHTML = "";
+    let itemId = Number(item.id);
+    let forecastDay = document.createElement("p");
+    forecastDay.classList.add("forecast-day");
+    item.appendChild(forecastDay);
+    let date = forecast[itemId].date;
+    console.log(date);
+    let formattedDate = format(date, "MMM d");
+    forecastDay.textContent = formattedDate;
+
+    let forecastIcon = document.createElement("img");
+    forecastIcon.classList.add("forecast-icon");
+    let icon = forecast[itemId].icon;
+    forecastIcon.src = forecastIcons[icon];
+    item.appendChild(forecastIcon);
+
+    let forecastTemp = document.createElement("p");
+    forecastTemp.classList.add("forecast-temp");
+    item.appendChild(forecastTemp);
+    if (elements.celsiusBtn.getAttribute("aria-pressed") === "true") {
+      forecastTemp.textContent = forecast[itemId].tempC + "°C";
+    } else if (elements.fahrenheitBtn.getAttribute("aria-pressed") === "true") {
+      forecastTemp.textContent = forecast[itemId].tempF + "°F";
+    }
+  });
 }
 
 function renderWeather(weatherObj) {
@@ -75,6 +131,8 @@ function renderWeather(weatherObj) {
     elements.precip.textContent = weatherObj.precip;
   }
 
+  let date = weatherObj.date;
+  elements.date.textContent = "Today, " + format(date, "do LLLL");
   elements.conditions.textContent = weatherObj.conditions;
   let initializedLocation = capitalizeNames(weatherObj.location);
   elements.locationText.textContent = initializedLocation;
@@ -109,4 +167,4 @@ function showLoading() {
   setScreen("loading");
 }
 
-export { elements, renderWeather, renderError, showLoading };
+export { elements, renderWeather, renderError, renderForecast, showLoading };

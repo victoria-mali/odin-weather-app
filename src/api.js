@@ -25,24 +25,61 @@ function celcToFahr(n) {
 
 async function processWeatherData(city) {
   const weatherData = await fetchWeatherData(city);
+  console.log(weatherData);
   let weatherDetails = {
-    tempC: Math.round(weatherData.currentConditions.temp),
-    tempF: celcToFahr(weatherData.currentConditions.temp),
-    conditions: weatherData.currentConditions.conditions,
-    feelslikeC: Math.round(weatherData.currentConditions.feelslike),
-    feelslikeF: celcToFahr(weatherData.currentConditions.feelslike),
-    icon: weatherData.currentConditions.icon,
-    location: weatherData.resolvedAddress,
-    precip: weatherData.currentConditions.precip,
-    precipprob: weatherData.currentConditions.precipprob,
-    humidity: weatherData.currentConditions.humidity,
-    sunrise: weatherData.currentConditions.sunrise,
-    sunset: weatherData.currentConditions.sunset,
-    uvindex: weatherData.currentConditions.uvindex,
-    windspeed: weatherData.currentConditions.windspeed,
-    pressure: weatherData.currentConditions.pressure,
-    description: weatherData.description,
+    weather: {
+      tempC: Math.round(weatherData.currentConditions.temp),
+      tempF: celcToFahr(weatherData.currentConditions.temp),
+      conditions: weatherData.currentConditions.conditions,
+      feelslikeC: Math.round(weatherData.currentConditions.feelslike),
+      feelslikeF: celcToFahr(weatherData.currentConditions.feelslike),
+      icon: weatherData.currentConditions.icon,
+      location: weatherData.resolvedAddress,
+      precip: weatherData.currentConditions.precip,
+      precipprob: weatherData.currentConditions.precipprob,
+      humidity: weatherData.currentConditions.humidity,
+      sunrise: weatherData.currentConditions.sunrise,
+      sunset: weatherData.currentConditions.sunset,
+      uvindex: weatherData.currentConditions.uvindex,
+      windspeed: weatherData.currentConditions.windspeed,
+      pressure: weatherData.currentConditions.pressure,
+      description: weatherData.description,
+      date: weatherData.days[0].datetime,
+    },
+    forecast: [
+      {
+        tempC: Math.round(weatherData.days[0].temp),
+        tempF: celcToFahr(weatherData.days[0].temp),
+        date: weatherData.days[0].datetime,
+        icon: weatherData.days[0].icon,
+      },
+      {
+        tempC: Math.round(weatherData.days[1].temp),
+        tempF: celcToFahr(weatherData.days[1].temp),
+        date: weatherData.days[1].datetime,
+        icon: weatherData.days[1].icon,
+      },
+      {
+        tempC: Math.round(weatherData.days[2].temp),
+        tempF: celcToFahr(weatherData.days[2].temp),
+        date: weatherData.days[2].datetime,
+        icon: weatherData.days[2].icon,
+      },
+      {
+        tempC: Math.round(weatherData.days[3].temp),
+        tempF: celcToFahr(weatherData.days[3].temp),
+        date: weatherData.days[3].datetime,
+        icon: weatherData.days[3].icon,
+      },
+      {
+        tempC: Math.round(weatherData.days[4].temp),
+        tempF: celcToFahr(weatherData.days[4].temp),
+        date: weatherData.days[4].datetime,
+        icon: weatherData.days[4].icon,
+      },
+    ],
   };
+
   return weatherDetails;
 }
 

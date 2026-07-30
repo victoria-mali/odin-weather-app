@@ -1,20 +1,30 @@
-import { elements, renderWeather, renderError, showLoading } from "./dom.js";
+import {
+  elements,
+  renderWeather,
+  renderError,
+  renderForecast,
+  showLoading,
+} from "./dom.js";
 import { processWeatherData } from "./api.js";
 
 let lastSearch;
+let forecast;
 
 async function showWeather(location) {
   showLoading();
   let weatherObj;
   try {
     weatherObj = await processWeatherData(location);
+    console.log(weatherObj);
   } catch (error) {
     lastSearch = null;
     renderError(error.message);
     return;
   }
-  lastSearch = weatherObj;
+  forecast = weatherObj.forecast;
+  lastSearch = weatherObj.weather;
   renderWeather(lastSearch);
+  renderForecast(forecast);
 }
 
 elements.searchContainer.addEventListener("submit", (e) => {
@@ -29,6 +39,7 @@ elements.celsiusBtn.addEventListener("click", () => {
   if (!lastSearch) return;
 
   renderWeather(lastSearch);
+  renderForecast(forecast);
 });
 
 elements.fahrenheitBtn.addEventListener("click", () => {
@@ -37,6 +48,7 @@ elements.fahrenheitBtn.addEventListener("click", () => {
   if (!lastSearch) return;
 
   renderWeather(lastSearch);
+  renderForecast(forecast);
 });
 
 document.addEventListener("DOMContentLoaded", async function () {
