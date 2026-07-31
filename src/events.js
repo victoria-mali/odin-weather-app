@@ -15,7 +15,6 @@ async function showWeather(location) {
   let weatherObj;
   try {
     weatherObj = await processWeatherData(location);
-    console.log(weatherObj);
   } catch (error) {
     lastSearch = null;
     renderError(error.message);

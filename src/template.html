@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather app</title>
   </head>
-  <body data-state="data">
+  <body data-state="loading">
     <div class="container">
       <div class="header">
         <div class="logo-div">
@@ -68,7 +68,7 @@
 
       <div class="temperature-info">
         <div class="temp-info-row1">
-          <p class="conditions">Sunny</p>
+          <p class="conditions"></p>
           <div class="switch-buttons">
             <button class="celsius-btn" aria-pressed="true">°C</button>
             <button class="fahrenheit-btn" aria-pressed="false">°F</button>
@@ -78,36 +78,34 @@
           <div class="temp-info-left">
             <div>
               <p class="date"></p>
-              <p class="temperature">31°C</p>
+              <p class="temperature"></p>
             </div>
             
-            <p class="temp-feels-like">Feels like 31°C</p>
+            <p class="temp-feels-like"></p>
           </div>
           <p class="description"></p>
         </div>
       </div>
 
             <div class="forecast">
-              <div class="forecast-day-div" id="0"">
+              <div class="forecast-day-div">
 
               </div>
 
-              <div class="forecast-day-div" id="1">
+              <div class="forecast-day-div">
 
               </div>
 
-                            <div class="forecast-day-div" id="2">
+                            <div class="forecast-day-div">
 
               </div>
 
-                            <div class="forecast-day-div" id="3">
+                            <div class="forecast-day-div">
 
               </div>
 
-                            <div class="forecast-day-div" id="4">
-                <p class="forecast-day">Today</p>
-                <img class="forecast-icon" src="img/logo.svg"  alt="An icon representing weather conditions">
-                <p class="forecast-temp">31°C</p>
+                            <div class="forecast-day-div">
+
               </div>
             </div>
 

@@ -13,12 +13,12 @@ import partlyCloudyDayIcon from "./img/icons/partly-cloudy-day.svg";
 import rainIcon from "./img/icons/rain.svg";
 import clearNightIcon from "./img/icons/clear-night.svg";
 import snowIcon from "./img/icons/snow.svg";
-import partlyCloudyNightIcon from "./img/icons/fog.svg";
-import fogIcon from "./img/icons/partly-cloudy-night.svg";
+import partlyCloudyNightIcon from "./img/icons/partly-cloudy-night.svg";
+import fogIcon from "./img/icons/fog.svg";
 import cloudyIcon from "./img/icons/cloudy.svg";
 import windIcon from "./img/icons/wind.svg";
 
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 const weatherImages = {
   "clear-day": clearDay,
@@ -86,30 +86,30 @@ function capitalizeNames(name) {
 }
 
 function renderForecast(forecast) {
-  elements.forecastDayDiv.forEach((item) => {
+  elements.forecastDayDiv.forEach((item, index) => {
+    item.style.setProperty("--i", index);
     item.innerHTML = "";
-    let itemId = Number(item.id);
     let forecastDay = document.createElement("p");
     forecastDay.classList.add("forecast-day");
     item.appendChild(forecastDay);
-    let date = forecast[itemId].date;
-    console.log(date);
-    let formattedDate = format(date, "MMM d");
+    let date = forecast[index].date;
+    let formattedDate = format(parseISO(date), "MMM d");
     forecastDay.textContent = formattedDate;
 
     let forecastIcon = document.createElement("img");
     forecastIcon.classList.add("forecast-icon");
-    let icon = forecast[itemId].icon;
+    let icon = forecast[index].icon;
     forecastIcon.src = forecastIcons[icon];
+    forecastIcon.alt = forecast[index].conditions;
     item.appendChild(forecastIcon);
 
     let forecastTemp = document.createElement("p");
     forecastTemp.classList.add("forecast-temp");
     item.appendChild(forecastTemp);
     if (elements.celsiusBtn.getAttribute("aria-pressed") === "true") {
-      forecastTemp.textContent = forecast[itemId].tempC + "°C";
+      forecastTemp.textContent = forecast[index].tempC + "°C";
     } else if (elements.fahrenheitBtn.getAttribute("aria-pressed") === "true") {
-      forecastTemp.textContent = forecast[itemId].tempF + "°F";
+      forecastTemp.textContent = forecast[index].tempF + "°F";
     }
   });
 }
@@ -132,15 +132,15 @@ function renderWeather(weatherObj) {
   }
 
   let date = weatherObj.date;
-  elements.date.textContent = "Today, " + format(date, "do LLLL");
+  elements.date.textContent = "Today, " + format(parseISO(date), "do LLLL");
   elements.conditions.textContent = weatherObj.conditions;
   let initializedLocation = capitalizeNames(weatherObj.location);
   elements.locationText.textContent = initializedLocation;
   elements.description.textContent = weatherObj.description;
   elements.precipprob.textContent = weatherObj.precipprob + "%";
   elements.humidity.textContent = weatherObj.humidity + "%";
-  elements.sunrise.textContent = weatherObj.sunrise.slice(0, 5);
-  elements.sunset.textContent = weatherObj.sunset.slice(0, 5);
+  elements.sunrise.textContent = weatherObj.sunrise?.slice(0, 5) ?? "—";
+  elements.sunset.textContent = weatherObj.sunset?.slice(0, 5) ?? "—";
   elements.uvindex.textContent = weatherObj.uvindex;
   elements.windspeed.textContent = weatherObj.windspeed + " km/h";
   elements.pressure.textContent = weatherObj.pressure + " mb";

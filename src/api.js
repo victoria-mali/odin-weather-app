@@ -25,7 +25,6 @@ function celcToFahr(n) {
 
 async function processWeatherData(city) {
   const weatherData = await fetchWeatherData(city);
-  console.log(weatherData);
   let weatherDetails = {
     weather: {
       tempC: Math.round(weatherData.currentConditions.temp),
@@ -46,38 +45,13 @@ async function processWeatherData(city) {
       description: weatherData.description,
       date: weatherData.days[0].datetime,
     },
-    forecast: [
-      {
-        tempC: Math.round(weatherData.days[0].temp),
-        tempF: celcToFahr(weatherData.days[0].temp),
-        date: weatherData.days[0].datetime,
-        icon: weatherData.days[0].icon,
-      },
-      {
-        tempC: Math.round(weatherData.days[1].temp),
-        tempF: celcToFahr(weatherData.days[1].temp),
-        date: weatherData.days[1].datetime,
-        icon: weatherData.days[1].icon,
-      },
-      {
-        tempC: Math.round(weatherData.days[2].temp),
-        tempF: celcToFahr(weatherData.days[2].temp),
-        date: weatherData.days[2].datetime,
-        icon: weatherData.days[2].icon,
-      },
-      {
-        tempC: Math.round(weatherData.days[3].temp),
-        tempF: celcToFahr(weatherData.days[3].temp),
-        date: weatherData.days[3].datetime,
-        icon: weatherData.days[3].icon,
-      },
-      {
-        tempC: Math.round(weatherData.days[4].temp),
-        tempF: celcToFahr(weatherData.days[4].temp),
-        date: weatherData.days[4].datetime,
-        icon: weatherData.days[4].icon,
-      },
-    ],
+    forecast: weatherData.days.slice(1, 6).map((day) => ({
+      tempC: Math.round(day.temp),
+      tempF: celcToFahr(day.temp),
+      date: day.datetime,
+      icon: day.icon,
+      conditions: day.conditions,
+    })),
   };
 
   return weatherDetails;
